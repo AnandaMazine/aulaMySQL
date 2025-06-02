@@ -127,6 +127,72 @@ select * from gafanhotos where nome like '%Silva%';
 
 select distinct nacionalidade from gafanhotos order by nacionalidade; # seleciona apenas os países uma vez
 
+select count(*) from cursos;
 
+select count(*) from cursos where carga > 40;
 
+select max(totaulas) from cursos where ano = 2016; #máximo de total de aulas no ano de 2016
+
+select min(totaulas) from cursos where ano = 2016; #mínimo de total de aulas no ano de 2016
+
+select sum(totaulas) from cursos where ano = 2016; #soma total do total de aulas no ano de 2016
+
+select sum(carga) from cursos where ano = 2014; #soma total da carga no ano de 2014
+
+select avg(totaulas) from cursos where ano = '2016';
+
+select avg(peso) from gafanhotos;
+
+select distinct nacionalidade from gafanhotos order by nacionalidade;
+
+#Exercício aula 12
+select * from gafanhotos where sexo = 'F';
+
+select * from gafanhotos where nascimento between '2000-01-01' and '2015/12/31' order by nascimento;
+
+select nome from gafanhotos where sexo = 'M' and profissao = 'Programador' order by nome;
+
+select * from gafanhotos where sexo = 'F' and nacionalidade = 'Brasil' and nome like 'J%';
+
+select nome, nacionalidade from gafanhotos where sexo = 'M' and nome like '%Silva%' and nacionalidade != 'Brasil' and peso < 100;
+
+select max(altura) from gafanhotos where sexo = 'M' and nacionalidade = 'Brasil';
+
+select avg(peso) from gafanhotos;
+
+select min(peso) from gafanhotos where sexo = 'F' and nacionalidade != 'Brasil' and nascimento
+between '1990-01-01' and '2000-12-31';
+
+select count(altura) from gafanhotos where sexo = 'F' and altura >1.90;
+
+------------------------------------------------------------------------------
+
+select distinct carga from cursos order by carga;
+
+select carga from cursos group by carga; # agrupar por
+
+select totaulas, count(*) from cursos group by totaulas order by totaulas; #agrupa e soma os agrupamentos
+
+select carga, count(*) from cursos group by carga;
+
+select carga, totaulas, count(*) from cursos where totaulas = 30 group by carga;
+
+select ano, count(*) from cursos group by ano having count(ano) >=5 order by count(*);
+
+select avg(carga) from cursos;
+
+select carga, count(*) from cursos where ano > 2015
+group by carga;
+
+select carga, count(*) from cursos where ano > 2015
+group by carga having (select avg(carga) from cursos); # junta o agrupamento de carga tendo como média de carga acima
+
+#Exercício aula 13
+select profissao, count(*) from gafanhotos group by profissao order by profissao;
+
+select nascimento, sexo, count(*) from gafanhotos where nascimento > '2005-01-01' group by sexo;
+
+select nacionalidade, count(*) from gafanhotos where nacionalidade != 'Brasil'group by nacionalidade having count(nacionalidade) >=3 order by count(nacionalidade);
+
+select altura, count(*) from gafanhotos where peso > 100 group by altura having altura > (select avg(altura) from gafanhotos);
 
